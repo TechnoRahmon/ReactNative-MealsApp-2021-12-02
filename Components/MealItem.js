@@ -1,6 +1,8 @@
 import React from 'react';
 import {View,Text , StyleSheet ,  TouchableOpacity, Platform, TouchableNativeFeedback, ImageBackground } from 'react-native';
 
+import BasicText  from './BasicText'
+
 const Mealitem = ({onSelectMeal , item }) => {
     return (
         <View style={styles.mealContainer}>
@@ -10,7 +12,7 @@ const Mealitem = ({onSelectMeal , item }) => {
                     <View style={{...styles.mealRow , ...styles.mealHeader }}>
                         <ImageBackground source={{uri:item.imageUrl}} style={styles.bgImage} >
                             <View style={styles.titleContainer}>
-                               <Text style={styles.title} numberOfLines={1}>{item.title}</Text> 
+                               <BasicText style={styles.title} numberOfLines={1}>{item.title}</BasicText> 
                             </View>
                             
                         </ImageBackground>
@@ -18,9 +20,9 @@ const Mealitem = ({onSelectMeal , item }) => {
                 
                 
                     <View style={{...styles.mealRow, ...styles.mealDetails }}>
-                        <Text>{item.duration}m</Text>
-                        <Text>{item.complexity.toUpperCase()}</Text>
-                        <Text>{item.affordability.toUpperCase()}</Text>
+                        <BasicText>{item.duration}m</BasicText>
+                        <BasicText>{item.complexity.toUpperCase()}</BasicText>
+                        <BasicText>{item.affordability.toUpperCase()}</BasicText>
                     </View>
                 </View>
             </TouchableOpacity>

@@ -1,13 +1,25 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Platform  } from 'react-native';
+import { StyleSheet, Text, View, Platform,Button  } from 'react-native';
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
 
 // navigator configuration 
 import { NavigationContainer} from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { enableScreens } from 'react-native-screens'
+
+// tab Nav
+import TabsNav from './Components/TabNavigtor'
+
+// filter stack nav 
+import FilterStackNav from './Components/FilterStackNav'
+
+// drawer nav 
+import { createDrawerNavigator } from '@react-navigation/drawer'
+
+const Drawer = createDrawerNavigator();
+
 
 // enbleScreen to optmize performance 
 enableScreens(); 
@@ -15,8 +27,6 @@ enableScreens();
 
 // importing Screen
 import CategoriesScreen from './Screens/CategoriesScreen'
-import CategoryMeal from './Screens/CategoryMeal'
-import MealDetailsScreen from './Screens/MealDetailsScreen'
 import FavoritesScreen from './Screens/FavoritesScreen'
 
 //import colors 
@@ -31,8 +41,7 @@ const fetchFont =()=>{
 }
 
 
-// Navigation Stack
-const Stack = createNativeStackNavigator();
+
 
 // App component
 export default function App() {
@@ -49,51 +58,29 @@ export default function App() {
     }
 
 
+
+
   return (
+ 
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Categories"
-          screenOptions={{
-            headerStyle:styles.headerStyle ,
-            headerTintColor:Platform.OS=='android'?'#fff' : Colors.accent , 
-            headerTitleAlign:"center"
-          }} >
-           
-            <Stack.Screen name="Categories"  component={CategoriesScreen} 
-              options={{title:"Meals Categories" ,
-              } } />
+        <Drawer.Navigator screenOptions={{
+            drawerActiveTintColor:Colors.accent,
+            drawerActiveBackgroundColor:Colors.bgColor,
+            drawerLabelStyle:{ fontFamily:'open-sans-bold'}
+        }}>
+          <Drawer.Screen name="Meal Categories" component={TabsNav}
+            options={{headerShown:false}} />
 
-            <Stack.Screen name="CategoryMeal"  component={CategoryMeal} 
-              options={({route})=>({title:route.params.itemName+' Meals' })} />
+            <Drawer.Screen name="FilterNav" component={FilterStackNav}
+               options={{headerShown:false, title:'Filter'}}/>
 
-
-            <Stack.Screen name="MealDetails"  component={MealDetailsScreen} 
-            options={({route})=>({ headerTitle:(props)=><Text style={styles.title} {...props} numberOfLines={1} >{route.params.mealName} </Text>})} /> 
-
-
-
-            <Stack.Screen name="Favorites"  component={FavoritesScreen} 
-              options={{title:"Favorites Meal"} } />
-
-        </Stack.Navigator>
+        </Drawer.Navigator>
       </NavigationContainer>
+     
+     
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  headerStyle:{
-    backgroundColor:Platform.OS==='android'? Colors.primary:'#fff',
-    
-  },
-  title:{
-    fontFamily:"open-sans-bold",
-    fontSize:20,
-    paddingHorizontal:10,
-    color:'#fff'
-  }
+
 });

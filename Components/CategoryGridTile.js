@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
         flex:1,
         margin:15,
         height:150,
-       overflow:'hidden',
-       borderRadius:10
+       overflow:Platform.OS==='android' && Platform.Version>=21 ? 'hidden' : 'visible',
+       borderRadius:10,
+       elevation:3,
     },
     TouchContainer:{
         flex:1
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems:'flex-end',
         borderRadius:10,
-        elevation:3,
+       
         shadowColor:'black',
         shadowOffset:{width:0,height:2},
         shadowRadius:10,
