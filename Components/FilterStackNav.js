@@ -14,9 +14,13 @@ import { DrawerActions } from '@react-navigation/native'
 // screen 
 import FilterScreen from './../Screens/FilterScreen'
 
+
+
 const Stack = createNativeStackNavigator();
 
 const FilterStacknav = ({navigation}) => {
+
+
     return (
         <Stack.Navigator
         screenOptions={{
@@ -36,8 +40,8 @@ const FilterStacknav = ({navigation}) => {
 
                             headerRight:({  })=><HeaderButtons HeaderButtonComponent={HeaderButton}>
                                                     <Item name="menu" iconName="ios-save" onPress={()=>{
-                                                           route.params.save()
-                                                        }}/>
+                                                        route.params.save()
+                                                    }}/>
                                                 </HeaderButtons>
                             })
               

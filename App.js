@@ -74,7 +74,7 @@ export default function App() {
               drawerLabelStyle:{ fontFamily:'open-sans-bold'}
           }}>
             <Drawer.Screen name="Meal Categories" component={TabsNav}
-              options={{headerShown:false}} />
+              options={{unmountOnBlur:true,headerShown:false}} />
 
               <Drawer.Screen name="FilterNav" component={FilterStackNav}
                 options={{headerShown:false, title:'Filter'}}/>

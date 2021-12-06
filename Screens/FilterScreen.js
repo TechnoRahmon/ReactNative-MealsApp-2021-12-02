@@ -3,8 +3,13 @@ import { View, Text, StyleSheet, Switch , LogBox } from 'react-native'
 import Colors from './../constant/Colors'
 
 import BasicText from './../Components/BasicText'
+import { setFilters} from './../store/action'
+import {useDispatch  } from 'react-redux'
 
 export default function FilterScreen({navigation }) {
+
+    const dispatch = useDispatch();
+
     // Filter Switch 
     const FilterSwitch =({ state, onChange,lable })=><View style={styles.filterContainer}>
                                                     <BasicText >{lable}</BasicText>        
@@ -27,8 +32,10 @@ export default function FilterScreen({navigation }) {
                 vegan : isVegan,
                 vegetarian : Vegetarian
             }
+            dispatch(setFilters(appliedFilters));
+
             console.log(appliedFilters);
-    }, [isLactoseFree, isVegan,isGlutenFree,Vegetarian ])
+    }, [isLactoseFree, isVegan,isGlutenFree,Vegetarian,dispatch ])
 
     useEffect(()=>{
         navigation.setParams({ save : SaveFilters })

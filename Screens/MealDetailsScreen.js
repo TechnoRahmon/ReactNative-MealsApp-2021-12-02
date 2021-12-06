@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, Text,StyleSheet, FlatList, ScrollView, Image  } from 'react-native'
 
-
 import BasicText from './../Components/BasicText'
 import { useSelector } from 'react-redux'
+
 
 export default function MealDetailsScreen({route }) {
 

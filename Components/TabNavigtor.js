@@ -58,12 +58,12 @@ const Tabnavigtor = ({navigation}) => {
 
 
         <Tab.Screen name="Meals" component={StackNav} 
-        options={{headerShown:false, tabBarStyle:{ backgroundColor:Colors.primary}}}
+        options={{unmountOnBlur:true,headerShown:false, tabBarStyle:{ backgroundColor:Colors.primary}}}
          />
 
 
         <Tab.Screen name="Favorite" component={FavoriteStackNav}
-          options={{headerShown:false, tabBarStyle:{ backgroundColor:Colors.accent}}}
+          options={{ unmountOnBlur:true,headerShown:false, tabBarStyle:{ backgroundColor:Colors.accent}}}
           />
        
     </Tab.Navigator>

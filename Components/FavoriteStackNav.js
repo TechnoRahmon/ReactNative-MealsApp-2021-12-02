@@ -15,11 +15,22 @@ import MealDetailsScreen from './../Screens/MealDetailsScreen'
 // Navigation Stack
 const Stack = createNativeStackNavigator();
 
+// action function 
+import { toggleFavorite } from './../store/action'
+import { useSelector,useDispatch } from 'react-redux'
+
 // drawer action
 import { DrawerActions } from '@react-navigation/native'
 
 
 const Stacknavigator = ({navigation}) => {
+
+      // retrive store data
+      const { favoriteMeals } = useSelector(state=>state.mealsReducer);
+      const dispatch = useDispatch();
+  
+      const isMealFav=(id)=>  favoriteMeals.some(meal=>meal.id === id);
+
     return (
         <Stack.Navigator initialRouteName="Categories"
           screenOptions={{
@@ -42,8 +53,9 @@ const Stacknavigator = ({navigation}) => {
             <Stack.Screen name="MealDetails"  component={MealDetailsScreen} 
             options={({route})=>({ headerTitle:route.params.mealName,
                                   headerRight:()=> <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                                      <Item title="Favorite" iconName="ios-star-outline" onPress={()=>{
-                                        console.log('Mark as favorite!')
+                                      <Item title="Favorite" iconName={isMealFav(route.params.mealId)?"ios-star":'ios-star-outline'} onPress={()=>{
+                                       dispatch(toggleFavorite(route.params.mealId))
+                                       console.log('Mark as favorite!')
                                     }} />
                                   </HeaderButtons>})} /> 
 
