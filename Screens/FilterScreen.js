@@ -1,5 +1,5 @@
 import React, {useState , useEffect, useCallback } from 'react'
-import { View, Text, StyleSheet, Switch } from 'react-native'
+import { View, Text, StyleSheet, Switch , LogBox } from 'react-native'
 import Colors from './../constant/Colors'
 
 import BasicText from './../Components/BasicText'
@@ -34,6 +34,11 @@ export default function FilterScreen({navigation }) {
         navigation.setParams({ save : SaveFilters })
     },[ SaveFilters])
 
+    LogBox.ignoreLogs([
+        'Non-serializable values were found in the navigation state',
+      ]);
+
+      
     return (
         <View style={styles.screen}>
             <Text style={styles.title}>Available Filters / Restrictions </Text>

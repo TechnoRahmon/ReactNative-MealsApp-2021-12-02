@@ -1,14 +1,15 @@
 import React from 'react'
 import { View, Text,StyleSheet, FlatList, ScrollView, Image  } from 'react-native'
-import { MEALS } from './../data/dummy-data'
+
 
 import BasicText from './../Components/BasicText'
-
+import { useSelector } from 'react-redux'
 
 export default function MealDetailsScreen({route }) {
 
+    const { meals : MEALS } = useSelector(state=>state.mealsReducer );
 
-    const ListItem = ({key , children})=><View key={key}>
+    const ListItem = ({  children})=><View >
                                                 <BasicText style={styles.listItem}>
                                                     {children}
                                                 </BasicText>

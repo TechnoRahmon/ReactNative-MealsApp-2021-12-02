@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Platform,Button  } from 'react-native';
+import { StyleSheet, Text, View, Platform,Button, LogBox   } from 'react-native';
 import AppLoading from 'expo-app-loading'
 import * as Font from 'expo-font'
 
@@ -20,9 +20,14 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 
 const Drawer = createDrawerNavigator();
 
+// redux config .. 
+import { Provider } from 'react-redux'
+import store from './store/store'
 
 // enbleScreen to optmize performance 
 enableScreens(); 
+
+
 
 
 // importing Screen
@@ -61,22 +66,22 @@ export default function App() {
 
 
   return (
- 
-      <NavigationContainer>
-        <Drawer.Navigator screenOptions={{
-            drawerActiveTintColor:Colors.accent,
-            drawerActiveBackgroundColor:Colors.bgColor,
-            drawerLabelStyle:{ fontFamily:'open-sans-bold'}
-        }}>
-          <Drawer.Screen name="Meal Categories" component={TabsNav}
-            options={{headerShown:false}} />
+    <Provider store={store}>
+        <NavigationContainer>
+          <Drawer.Navigator screenOptions={{
+              drawerActiveTintColor:Colors.accent,
+              drawerActiveBackgroundColor:Colors.bgColor,
+              drawerLabelStyle:{ fontFamily:'open-sans-bold'}
+          }}>
+            <Drawer.Screen name="Meal Categories" component={TabsNav}
+              options={{headerShown:false}} />
 
-            <Drawer.Screen name="FilterNav" component={FilterStackNav}
-               options={{headerShown:false, title:'Filter'}}/>
+              <Drawer.Screen name="FilterNav" component={FilterStackNav}
+                options={{headerShown:false, title:'Filter'}}/>
 
-        </Drawer.Navigator>
-      </NavigationContainer>
-     
+          </Drawer.Navigator>
+        </NavigationContainer>
+      </Provider>
      
   );
 }

@@ -1,16 +1,18 @@
 import React from 'react'
 import { View, Text,StyleSheet,Button } from 'react-native'
 import MealList from './../Components/MealList'
-import {MEALS} from '../data/dummy-data'
 
+
+import { useSelector } from 'react-redux'
 
 export default function FavoritesScreen({navigation}) {
 
-   // filter the category Meals 
-   const FavMeals = MEALS.filter(meal => meal.id ==='m1' || meal.id==='m2')
+   // retrive data from redux
+   const { favoriteMeals }= useSelector(state => state.mealsReducer );
+
 
     return (
-       <MealList dataList={FavMeals} navigation={navigation} />
+       <MealList dataList={favoriteMeals} navigation={navigation} />
     )
 }
 
